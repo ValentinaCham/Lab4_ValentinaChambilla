@@ -111,7 +111,7 @@ public class Menu_Ejercicio1 {
             System.out.print("DNI: ");
             DNI = scan.nextInt();
             System.out.print("Nombre: ");
-            scan.next();
+            scan.nextLine();
             nombre = scan.nextLine();
             System.out.print("Celular: ");
             celular = scan.nextInt();

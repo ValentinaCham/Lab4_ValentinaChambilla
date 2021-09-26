@@ -9,10 +9,10 @@ import java.text.DateFormat;
 import java.util.Date;
 
 public class Paquete {
-    private int identificador;
+    private int identificador=0;
     private Date fecha_recepcion= new Date(-1900,1,0);
     private Date fecha_entrega= new Date(-1900,1,0);
-    private Persona persona_origen= new Persona();
+    private Persona persona_origen = new Persona();
     private int DNI_persona;
     private double pesoKilos;
     private String direccion;

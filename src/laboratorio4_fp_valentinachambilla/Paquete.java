@@ -5,29 +5,32 @@
  */
 package laboratorio4_fp_valentinachambilla;
 
+import java.text.DateFormat;
 import java.util.Date;
 
 public class Paquete {
     private int identificador;
-    private Date fecha;
-    private Persona persona_origen;
+    private Date fecha_recepcion= new Date(-1900,1,0);
+    private Date fecha_entrega= new Date(-1900,1,0);
+    private Persona persona_origen= new Persona();
+    private int DNI_persona;
     private double pesoKilos;
-    private boolean entregado=false;
+    private String direccion;
+    private double costo;
     
-    public void setPaquete(int pIdentificador, Date pFecha, int DNIingre, double peso, Persona[] RegistroPersonas){
+    public void setPaquete(int pIdentificador, Date rFecha, int DNIingre,
+            double peso, double costoI, String direccionI, Persona PersonaDniIngre){
         identificador = pIdentificador;
-        fecha = pFecha;
+        fecha_recepcion = rFecha;
         pesoKilos = peso;
-        Persona PersonaDniIngre = new Persona();
-        for (int i=0; i<RegistroPersonas.length;i++){
-            if (DNIingre == RegistroPersonas[i].getDNI())
-                PersonaDniIngre = RegistroPersonas[i];
-        }
+        costo = costoI;
+        DNI_persona = DNIingre;
         persona_origen = PersonaDniIngre;
+        direccion = direccionI;
     }
     
-    public void setEntrega(){
-        entregado = true;
+    public void setEntrega(Date eFecha){
+        fecha_entrega = eFecha;
     }
     
     public int getIdentificador(){
@@ -36,5 +39,31 @@ public class Paquete {
     
     public double getPeso(){
         return pesoKilos;
+    }
+    
+    public double getCosto(){
+        return costo;
+    }
+    
+    public String getRecepcion(){
+        DateFormat formatoMedio = DateFormat.getDateInstance(DateFormat.MEDIUM);
+        return formatoMedio.format(fecha_recepcion);
+    }
+    
+    public Persona getPersona(){
+        return persona_origen;
+    }
+    
+    public int getDNIpersona(){
+        return DNI_persona;
+    }
+    
+    public String getEntrega(){
+        DateFormat formatoMedio = DateFormat.getDateInstance(DateFormat.MEDIUM);
+        return formatoMedio.format(fecha_entrega);
+    }
+    
+    public String getDireccion(){
+        return direccion;
     }
 }

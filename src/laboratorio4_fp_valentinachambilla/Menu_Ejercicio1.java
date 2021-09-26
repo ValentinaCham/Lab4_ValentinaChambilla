@@ -19,6 +19,7 @@ public class Menu_Ejercicio1 {
         int cantidadPersonas=-1;
         int cantidadPaquete=-1;
         
+        //MENÚ INICIAL
         while(continuar){
         System.out.println("*********************************MENÚ DE EMPRESA XXXXXXXXXXX*********************************");
         
@@ -36,8 +37,10 @@ public class Menu_Ejercicio1 {
         }
         
         while(continuar){
+            //SWITCH PARA TODOS LOS CASOS
             switch (desicion){
                 case 1:{
+                    //REGISTRO DE PERSONAS
                     cantidadPersonas++;
                     if (cantidadPersonas<10 && cantidadPersonas>-1){
                         Personas_Registradas[cantidadPersonas] = RegistroPersona(Personas_Registradas, cantidadPersonas);
@@ -47,6 +50,7 @@ public class Menu_Ejercicio1 {
                     break;
                 }
                 case 2:{
+                    //REGISTRO DE PAQUETES
                     cantidadPaquete++;
                     if (cantidadPaquete<10 && cantidadPaquete>-1)
                         Paquetes_Registrados[cantidadPaquete] = RegistroPaquete(Paquetes_Registrados, cantidadPaquete, Personas_Registradas);
@@ -55,6 +59,9 @@ public class Menu_Ejercicio1 {
                     break;
                 }
                 case 3:{
+                    //REGISTRAR PAQUETE ENTREGADO, en el caso
+                    //que se coloque un indicador no válido
+                    //No sucedera nada, y pasará
                     System.out.println("¿Qué paquete se ha entregado? (Colocar el Identificador):");
                     int indicador = scan.nextInt();
                     for (int i=0; i<=cantidadPaquete; i++){
@@ -64,22 +71,27 @@ public class Menu_Ejercicio1 {
                     break;
                 }
                 case 4: {
+                    //SE COLOCARÁ UN PESO MENOR, Y SE MOTRARA LOS IGUALES O MAYOR
                     ComparacionPeso(Paquetes_Registrados);
                     break;
                 }
                 case 5: {
+                    //MOSTRARÁ LOS PAQUETES DE IGUAL COSTO
                     ComparacionCosto(Paquetes_Registrados);
                     break;
                 }
                 case 6: {
+                    //MUESTRA LOS PENDIENTES DE ENVIO
                     ComparacionEnvio(Paquetes_Registrados, cantidadPaquete);
                     break;
                 }
                 case 7: {
+                    //MUESTRA LA PERSONA QUE PIDIO UN PAQUETE
                     PersonaDeEnvio(Paquetes_Registrados);
                     break;
                 }
                 case 8:{
+                    //PAQUETES DE UNA PERSONA CON DNI
                     PaqueteDNI(Paquetes_Registrados);
                 }
             }
@@ -105,6 +117,7 @@ public class Menu_Ejercicio1 {
         String nombre="";
         int DNI=0,celular=0;
         Scanner scan= new Scanner(System.in);
+        //REGISTRAR LOS DATOS EN FORMATO VALIDO
         while (continuar){
             System.out.println("Ingrese los datos solicitados para el registro");
             //RECUERDA REALIZAR SI SE ACPETA O NO
@@ -116,7 +129,7 @@ public class Menu_Ejercicio1 {
             System.out.print("Celular: ");
             celular = scan.nextInt();
             if (DNI<100000000 && celular<1000000000 && celular>99999999){
-                System.out.println("¿Confirma los datos a subir? \n1. SI \n2.NO");
+                System.out.println("¿Confirma los datos a subir? \n1. SI \n2. NO");
                 int dec = scan.nextInt();
                 if (dec == 1)
                     break;
@@ -127,7 +140,7 @@ public class Menu_Ejercicio1 {
         }
         PersonaRegistro[cantidadPersona] = new Persona();
         PersonaRegistro[cantidadPersona].setNomDniCel(nombre, DNI, celular);
-        
+        //PARA QUE SE GUARDE EN EL ARRAY INICIAL
         return PersonaRegistro[cantidadPersona];
     }
     
@@ -137,8 +150,8 @@ public class Menu_Ejercicio1 {
         String direccion;
         Scanner scan= new Scanner(System.in);
         
+        //QUE SE REGISTREN LOS DATOS DEL PAQUETE
         System.out.println("Ingrese los datos solicitados para el registro");
-        //RECUERDA REALIZAR SI SE ACPETA O NO
         System.out.print("Identificador: ");
         identificador = scan.nextInt();
         System.out.println("Fecha de recepcion: (Ingrese primero día, luego el mes en formato número y luego el año)");
@@ -160,6 +173,7 @@ public class Menu_Ejercicio1 {
         
         Date fecha = new Date((año-1900), (mes-1), dia);
         
+        //DETERMINAR LA PERSONA ASOCIADA AL DNI
         Persona PersonaDniIngre = new Persona();
         for (int i=0; i<PersonaRegistro.length;i++){
             if (DNIpersona == PersonaRegistro[i].getDNI())
@@ -176,6 +190,7 @@ public class Menu_Ejercicio1 {
         int dia, mes, año;
         int identi=0;
         Scanner scan= new Scanner(System.in);
+        //INGRESAR LA FECHA DE ENTREGA
         System.out.println("Fecha de entrega: (Ingrese primero día, luego el mes en formato número y luego el año)");
         System.out.println("Día: ");
         dia = scan.nextInt();
@@ -189,6 +204,7 @@ public class Menu_Ejercicio1 {
                 identi = i;
         }
         PaqueteRegistro[identi].setEntrega(entrega);
+        //RETORNAR EL OBJETO PARA QUE SE CAMBIE EN LOS ARCHIVOS INICIALES
         return PaqueteRegistro[identi];
     }
     
@@ -198,6 +214,7 @@ public class Menu_Ejercicio1 {
         for (int i=0; i<20;i++)
             RegistroTemporal[i] = new Paquete();
         Scanner scan= new Scanner(System.in);
+        //INGRESAR LA CANTIDAD MÍNIMA
         System.out.print("Ingrese la cantidad de peso mínimo (en kilos): ");
         int pesoMinimo = scan.nextInt();
         int cantidadDePaquetes=0;
@@ -209,6 +226,7 @@ public class Menu_Ejercicio1 {
             }
         }
         
+        //LANZAR LOS ELEMENTOS
         if (cantidadDePaquetes>0){
             System.out.printf( "%5s%18s%10s%6s%6s%40s%12s\n", "Ind.", "Fecha_Recepción", "Dni_Cli", "Peso","Costo","Dirección", "Est.Entrega" );
             for ( int contador = 0; contador < cantidadDePaquetes; contador++)
@@ -226,6 +244,7 @@ public class Menu_Ejercicio1 {
         for (int i=0; i<20;i++)
             RegistroTemporal[i] = new Paquete();
         Scanner scan= new Scanner(System.in);
+        //INGRESAR EL COSTO BUSCADO
         System.out.print("Ingrese el costo: ");
         int costo = scan.nextInt();
         int cantidadDePaquetes=0;
@@ -237,6 +256,7 @@ public class Menu_Ejercicio1 {
             }
         }
         
+        //LANZAR LOS ELEMENTOS
         if (cantidadDePaquetes>0){
             System.out.printf( "%5s%18s%10s%6s%6s%40s%12s\n", "Ind.", "Fecha_Recepción", "Dni_Cli", "Peso","Costo","Dirección", "Est.Entrega" );
             for ( int contador = 0; contador < cantidadDePaquetes; contador++)
@@ -261,6 +281,7 @@ public class Menu_Ejercicio1 {
             }
         }
         
+        //LANZAR LOS DATOS
         if (cantidadDePaquetes>0){
             System.out.printf( "%5s%18s%10s%6s%6s%40s\n", "Ind.", "Fecha_Recepción", "Dni_Cli", "Peso","Costo","Dirección");
             for ( int contador = 0; contador < cantidadDePaquetes; contador++)
@@ -275,6 +296,7 @@ public class Menu_Ejercicio1 {
     public static void PersonaDeEnvio(Paquete[] PaqueteRegistro){
         Scanner scan= new Scanner(System.in);
         Persona Buscada = new Persona();
+        //INGRESAR IDENTIFICADOR
         System.out.print("Ingrese el Identificador del paquete: ");
         int identificador = scan.nextInt();
         for (int i=0; i<PaqueteRegistro.length; i++){
@@ -283,6 +305,7 @@ public class Menu_Ejercicio1 {
             }
         }
         
+        //LANZAR RESPUESTA
         if ((Buscada.getNombre()).equals(""))
             System.out.println("No hay paquete con ese identificador");
         else {
@@ -307,7 +330,7 @@ public class Menu_Ejercicio1 {
                 cantidadDePaquetes++;
             }
         }
-        
+        //LANZAR DATOS
         if (cantidadDePaquetes>0){
             System.out.printf("%5s%18s%10s%6s%6s%40s%12s\n", "Ind.", "Fecha_Recepción", "Dni_Cli", "Peso","Costo","Dirección", "Est.Entrega");
             for ( int contador = 0; contador < cantidadDePaquetes; contador++)
@@ -316,6 +339,6 @@ public class Menu_Ejercicio1 {
                         RegistroTemporal[contador].getCosto(), RegistroTemporal[contador].getDireccion() ,RegistroTemporal[contador].getEntrega());
         }
         else
-            System.out.print("No hay paquetes de ese costo en el sistema.");
+            System.out.println("No hay paquetes de ese costo en el sistema.");
     }
 }

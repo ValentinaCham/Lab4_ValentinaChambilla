@@ -57,7 +57,7 @@ public class Menu_Ejercicio1 {
                 case 3:{
                     System.out.println("¿Qué paquete se ha entregado? (Colocar el Identificador):");
                     int indicador = scan.nextInt();
-                    for (int i=0; i<cantidadPaquete; i++){
+                    for (int i=0; i<=cantidadPaquete; i++){
                         if (Paquetes_Registrados[i].getIdentificador() == indicador)
                             Paquetes_Registrados[i] = RegistroDeEntrega(Paquetes_Registrados, indicador);
                     }
@@ -155,8 +155,8 @@ public class Menu_Ejercicio1 {
         System.out.print("DNI del Cliente: ");
         DNIpersona = scan.nextInt();
         System.out.print("Dirección: ");
-        direccion = scan.nextLine();
         scan.nextLine();
+        direccion = scan.nextLine();
         
         Date fecha = new Date((año-1900), (mes-1), dia);
         
@@ -167,7 +167,7 @@ public class Menu_Ejercicio1 {
         }
         
         PaqueteRegistro[cantidadPaquetes] = new Paquete();
-        PaqueteRegistro[cantidadPaquetes].setPaquete(identificador, fecha, DNIpersona,pesoKilos,costoEn, direccion, PersonaDniIngre);
+        PaqueteRegistro[cantidadPaquetes].setPaquete(identificador, fecha, DNIpersona, pesoKilos, costoEn, direccion, PersonaDniIngre);
         
         return PaqueteRegistro[cantidadPaquetes];
     }
@@ -185,7 +185,7 @@ public class Menu_Ejercicio1 {
         año = scan.nextInt();
         Date entrega = new Date((año-1900), (mes-1), dia);
         for (int i=0; i<PaqueteRegistro.length; i++){
-            if (PaqueteRegistro[i].getIdentificador() == indicador)
+            if ((PaqueteRegistro[i].getIdentificador()) == indicador)
                 identi = i;
         }
         PaqueteRegistro[identi].setEntrega(entrega);
@@ -264,7 +264,7 @@ public class Menu_Ejercicio1 {
         if (cantidadDePaquetes>0){
             System.out.printf( "%5s%18s%10s%6s%6s%40s\n", "Ind.", "Fecha_Recepción", "Dni_Cli", "Peso","Costo","Dirección");
             for ( int contador = 0; contador < cantidadDePaquetes; contador++)
-                System.out.printf("%5d%18s%10d%6.2f%6.2f%-40s\n",RegistroTemporal[contador].getIdentificador(), RegistroTemporal[contador].getRecepcion(),
+                System.out.printf("%5d%18s%10d%6.2f%6.2f%40s\n",RegistroTemporal[contador].getIdentificador(), RegistroTemporal[contador].getRecepcion(),
                         (RegistroTemporal[contador].getPersona()).getDNI(), RegistroTemporal[contador].getPeso(),
                         RegistroTemporal[contador].getCosto(), RegistroTemporal[contador].getDireccion());
         }
@@ -277,11 +277,12 @@ public class Menu_Ejercicio1 {
         Persona Buscada = new Persona();
         System.out.print("Ingrese el Identificador del paquete: ");
         int identificador = scan.nextInt();
-        for (int i=0; i< PaqueteRegistro.length; i++){
-            if ((PaqueteRegistro[i].getIdentificador())==identificador){
+        for (int i=0; i<PaqueteRegistro.length; i++){
+            if ((PaqueteRegistro[i].getIdentificador()) == identificador){
                 Buscada = PaqueteRegistro[i].getPersona();
             }
         }
+        
         if ((Buscada.getNombre()).equals(""))
             System.out.println("No hay paquete con ese identificador");
         else {
